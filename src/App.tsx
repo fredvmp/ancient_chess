@@ -1,9 +1,10 @@
 import type { FC } from 'react';
 import layoutStyles from './components/Layout/AppLayout.module.css';
 import AppLayout from './components/Layout/AppLayout';
-import BoardPlaceholder from './components/Board/BoardPlaceholder';
 import CapturedPiecesPanel from './components/Panels/CapturedPiecesPanel';
 import MoveLogPanel from './components/Panels/MoveLogPanel';
+import ChessBoard from './components/Board/ChessBoard';
+
 
 const App: FC = () => (
   <AppLayout>
@@ -12,7 +13,7 @@ const App: FC = () => (
     </aside>
 
     <main style={{ display: 'flex', justifyContent: 'center' }}>
-      <BoardPlaceholder />
+      <ChessBoard />  
     </main>
 
     <aside className={layoutStyles.panel}>
