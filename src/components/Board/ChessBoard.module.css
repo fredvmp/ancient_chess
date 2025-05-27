@@ -1,4 +1,4 @@
-/* CSS del tablero 8×8 */
+/* tablero 8×8 */
 .board {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
@@ -11,7 +11,7 @@
   overflow: hidden;
 }
 
-/* CSS para las celdas */
+/* Celdas del tablero*/
 .square {
   display: flex;
   justify-content: center;
@@ -20,3 +20,13 @@
 
 .light { background: #e3e3e3; }
 .dark  { background: #2b2b2b; }
+
+/* Piezas del tablero */
+.piece {
+  height: 80%;
+  width: 80%;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  user-select: none;
+}

@@ -1,6 +1,9 @@
 import type { FC, ReactNode } from 'react';
 import BoardSquare, { type Square } from './BoardSquare';
 import styles from './ChessBoard.module.css';
+import { CreateInitialPieces } from './CreateInitialPieces';
+
+const pieces = CreateInitialPieces();
 
 const ChessBoard: FC = () => {
   const squares: ReactNode[] = [];
@@ -10,12 +13,14 @@ const ChessBoard: FC = () => {
     for (let col = 0; col < 8; col++) {
       const square: Square = { col, row };
       const color = (row + col) % 2 === 0 ? 'dark' : 'light';
+      const piece = pieces.find(p => p.square.col === col && p.square.row === row);
 
       squares.push(
         <BoardSquare
           key={`${col}${row}`}
           square={square}
           color={color}
+          pieceImg={piece?.img}
         />,
       );
     }
