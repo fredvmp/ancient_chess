@@ -2,10 +2,15 @@ import type { FC, ReactNode } from "react";
 import { useState, useCallback } from "react";
 import BoardSquare, { type Square } from './BoardSquare';
 import styles from './ChessBoard.module.css';
-import useChessGame from '../../hooks/useChessGame';
+import type { Piece } from './createInitialPieces';
 
-const ChessBoard: FC = () => {
-  const { pieces, currentTurn, move } = useChessGame();
+interface Props {
+  pieces: Piece[];
+  currentTurn: 'white' | 'black';
+  move: (from: Square, to: Square) => void;
+}
+
+const ChessBoard: FC<Props> = ({ pieces, currentTurn, move }) => {
   const [selected, setSelected] = useState<Square | null>(null);
   const squares: ReactNode[] = [];
 
