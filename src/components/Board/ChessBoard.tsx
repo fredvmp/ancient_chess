@@ -1,25 +1,27 @@
 import type { FC, ReactNode } from "react";
+import { useState, useCallback } from "react";
 import BoardSquare, { type Square } from './BoardSquare';
 import styles from './ChessBoard.module.css';
 import useChessGame from '../../hooks/useChessGame';
-import { useState } from "react";
 
 const ChessBoard: FC = () => {
-  const { pieces, move } = useChessGame();
+  const { pieces, currentTurn, move } = useChessGame();
   const [selected, setSelected] = useState<Square | null>(null);
   const squares: ReactNode[] = [];
 
-  const handleClick = (sq: Square) => {
+  const handleClick = useCallback((sq: Square) => {
+
+    // segundo clic -> intenta mover la pieza si se ha seleccionado una
     if (selected) {
-      // segundo clic -> intenta mover la pieza si se ha seleccionado una
-      move(selected, sq); 
+      move(selected, sq);
       setSelected(null);
     } else {
-      // primer clic: selecciona solo si hay una pieza en la casilla
-      const hasPiece = pieces.some(p => p.square.col === sq.col && p.square.row === sq.row);
-      if (hasPiece) setSelected(sq);
+      // primer clic -> selecciona solo si hay una pieza en la casilla
+      const piece = pieces.find(p => p.square.col === sq.col && p.square.row === sq.row);
+      if (piece && piece.color === currentTurn) setSelected(sq);  // selecciona solo pieza del turno
+
     }
-  };
+  }, [selected, pieces, currentTurn, move]);
 
   // row 7 -> 0 para que (0,0) quede en la esquina inf-izda. 
   for (let row = 7; row >= 0; row--) {
