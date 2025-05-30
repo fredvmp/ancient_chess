@@ -19,7 +19,7 @@ const MoveLogPanel: FC<Props> = ({ moves }) => (
     <ol style={{ paddingLeft:'1.2rem' }}>
       {moves.map(mv => (
         <li key={mv.no}>
-          {COLOR_EMO[mv.color]}  ⮞  {PIECE_EMO[mv.piece]}  {`${mv.from ? `${String.fromCharCode(97+mv.from.col)}${mv.from.row+1}` : ''}→${String.fromCharCode(97+mv.to.col)}${mv.to.row+1}`}
+          {COLOR_EMO[mv.color]}  ⮞  {PIECE_EMO[mv.piece]}  {mv.san}  {`${mv.from ? `${String.fromCharCode(97+mv.from.col)}${mv.from.row+1}` : ''}→${String.fromCharCode(97+mv.to.col)}${mv.to.row+1}`}
           {mv.captured && (
             <div style={{ marginLeft:'0.3rem' }}>
               ⮞ ❌{COLOR_EMO[mv.captured.color]} {PIECE_EMO[mv.captured.piece]} ❌
