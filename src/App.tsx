@@ -30,7 +30,7 @@ const App: FC = () => {
 
       {/* Panel derecho -> Registro de movimientos */}
       <aside className={layoutStyles.panel}>
-        <MoveLogPanel />
+        <MoveLogPanel moves={game.moves} />
       </aside>
     </AppLayout>
   );
