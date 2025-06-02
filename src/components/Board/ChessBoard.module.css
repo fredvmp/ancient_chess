@@ -35,3 +35,9 @@
   object-fit: contain;
   user-select: none;
 }
+
+/* Resaltar casilla a la que una pieza se peude mover */
+.legal {
+  background: rgba(102, 255, 102, 0.35) !important;
+  border-radius: 100%;
+}

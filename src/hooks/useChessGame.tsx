@@ -21,10 +21,12 @@ interface Return {
   moves: Move[];
   currentTurn: 'white' | 'black';
   move: (from: Square, to: Square) => void;
+  legalMoves: (from: Square) => Square[];
 }
 
 const files = ['a','b','c','d','e','f','g','h'] as const;
 const toAlg = ({ col, row }: Square): AlgSq => `${files[col]}${row + 1}` as AlgSq;
+const fromAlg = (alg: AlgSq): Square => ({ col: files.indexOf(alg[0] as any), row: Number(alg[1]) - 1 });
 
 export default function useChessGame(): Return {
   const [pieces, setPieces]   = useState<Piece[]>(createInitialPieces);
@@ -80,7 +82,13 @@ export default function useChessGame(): Return {
     setCurrentTurn(t => (t === 'white' ? 'black' : 'white'));
   }, [currentTurn]);
 
-  return { pieces, captured, moves, currentTurn, move };
+  const legalMoves = useCallback((from: Square): Square[] => {
+    const chess = chessRef.current;
+    const movesVerbose = chess.moves({ square: toAlg(from), verbose: true });
+    return movesVerbose.map(m => fromAlg(m.to as AlgSq));
+  }, []);
+
+  return { pieces, captured, moves, currentTurn, move, legalMoves };
 }
 
 // Transformarr los simbolos de chess.js a kind

@@ -25,12 +25,13 @@ const App: FC = () => {
           pieces={game.pieces}
           currentTurn={game.currentTurn}
           move={game.move}
+          legalMoves={game.legalMoves}
         />
       </main>
 
       {/* Panel derecho -> Registro de movimientos */}
       <aside className={layoutStyles.panel}>
-        <MoveLogPanel moves={game.moves} />
+        <MoveLogPanel moves={game.moves} currentTurn={game.currentTurn} />
       </aside>
     </AppLayout>
   );
