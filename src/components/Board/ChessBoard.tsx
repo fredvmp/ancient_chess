@@ -6,49 +6,50 @@ import type { Piece } from './createInitialPieces';
 
 interface Props {
   pieces: Piece[];
-  currentTurn: 'white' | 'black';
+  currentTurn: "white" | "black";
   move: (from: Square, to: Square) => void;
   legalMoves: (from: Square) => Square[];
+  gameOver: { ended: boolean };
 }
 
-const ChessBoard: FC<Props> = ({ pieces, currentTurn, move, legalMoves }) => {
+const ChessBoard: FC<Props> = ({ pieces, currentTurn, move, legalMoves, gameOver, }) => {
   const [selected, setSelected] = useState<Square | null>(null);
   const squares: ReactNode[] = [];
   const legalSqList = useMemo(() => selected ? legalMoves(selected) : [], [selected, legalMoves]);
 
-  const handleClick = useCallback((sq: Square) => {
-    const clickedPiece = pieces.find(p => p.square.col === sq.col && p.square.row === sq.row);
-    // segundo clic -> intenta mover la pieza si se ha seleccionado una
-    if (selected) {
-      // Clic en la misma casilla para cancelar selección
-      if (selected.col === sq.col && selected.row === sq.row) {
+  const handleClick = useCallback(
+    (sq: Square) => {
+      // Fin de partida
+      if (gameOver.ended) return; 
+
+      const clickedPiece = pieces.find(
+        (p) => p.square.col === sq.col && p.square.row === sq.row
+      );
+
+      if (selected) {
+        // Cancelar selección
+        if (selected.col === sq.col && selected.row === sq.row) {
+          setSelected(null);
+          return;
+        }
+        // Cambiar a otra pieza del mismo color
+        if (clickedPiece && clickedPiece.color === currentTurn) {
+          setSelected(sq);
+          return;
+        }
+        // Intentar mover
+        move(selected, sq);
         setSelected(null);
-        return;
+      } else {
+        if (clickedPiece && clickedPiece.color === currentTurn) {
+          setSelected(sq);
+        }
       }
-      // Clic en otra pieza para cambiar la selección
-      if (clickedPiece && clickedPiece.color === currentTurn) {
-        setSelected(sq);
-        return;
-      }
+    },
+    [selected, pieces, currentTurn, move, gameOver]
+  );
 
-      // Clic en otro sitio para mover la pieza
-      move(selected, sq);
-      setSelected(null);
-    } else {
-      // primer clic -> selecciona solo si hay una pieza en la casilla
-      const piece = pieces.find(p => p.square.col === sq.col && p.square.row === sq.row);
-      if (piece && piece.color === currentTurn) setSelected(sq);  // selecciona solo pieza del turno
-
-    }
-
-    
-
-
-
-
-
-  }, [selected, pieces, currentTurn, move]);
-
+  
   // row 7 -> 0 para que (0,0) quede en la esquina inf-izda. 
   for (let row = 7; row >= 0; row--) {
     for (let col = 0; col < 8; col++) {
