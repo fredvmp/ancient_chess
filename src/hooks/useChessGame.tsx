@@ -118,12 +118,14 @@ export default function useChessGame(): Return {
         );
       });
 
+      /* 
       if (capturedPiece) {
         setCaptured((prev) => ({
           ...prev,
           [mover.color]: [...prev[mover.color], capturedPiece],
         }));
       }
+      */
 
       // Registrar eliminaciones
       if (result.captured) {
