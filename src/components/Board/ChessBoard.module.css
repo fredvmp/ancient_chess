@@ -1,3 +1,19 @@
+.board-wrap{
+  padding:1rem;
+  border:5px solid rgba(0, 0, 0, 0.663);
+  border-radius:.8rem;
+  background:rgba(255,255,255,0.10);    
+  backdrop-filter:blur(8px) saturate(150%);
+  -webkit-backdrop-filter:blur(8px) saturate(150%);
+  box-shadow:0 4px 20px rgba(0,0,0,0.35);
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  position:relative;
+  z-index:10;
+}
+
 /* Tablero */
 .board {
   display: grid;
@@ -5,8 +21,8 @@
   grid-template-rows:    repeat(8, minmax(0, 1fr));
   width: 86vmin;
   aspect-ratio: 1 / 1;
-  border: 10px solid #181818;
-  border-radius: .5rem;
+  border:5px solid rgba(0, 0, 0, 0.663);
+  border-radius:.5rem;
   overflow: hidden;
   z-index:11;
 

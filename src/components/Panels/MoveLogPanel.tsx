@@ -18,7 +18,7 @@ const PIECE_EMO: Record<string, string> = {
 
 const TurnIndicator: FC<{ turn: 'white' | 'black' }> = ({ turn }) => (
   <div style={{
-    border: '1px solid #555', borderRadius: '.4rem',
+    border: '3px solid rgb(218, 218, 218)', borderRadius: '.8rem',
     padding: '.25rem .5rem', marginBottom: '.5rem',
     textAlign:'center', fontSize:'.9rem',
     background: 'rgba(255, 255, 255, 0.2)',
@@ -35,7 +35,7 @@ const MoveLogPanel: FC<Props> = ({ moves, currentTurn }) => (
       overflowY: "auto",
       background: "#1a1a1a",
       color: "#f0f0f0",
-      border: "1px solid #555",
+      border: "3px solid rgba(0, 0, 0, 0.42)",
       borderRadius: ".5rem",
       padding: ".5rem",
       fontSize: ".85rem",
