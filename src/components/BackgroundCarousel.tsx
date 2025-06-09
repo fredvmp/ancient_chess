@@ -1,9 +1,12 @@
-import { useEffect, useState, type FC } from "react";
-import ruin01 from './images/ruinas_otoño.png'
-import ruin02 from './images/ruinas_primavera.png'
-import king from 'ancient_chess\public\figures\king_white.png'
-import kingg from '/figures/king_white.png'
 
+/* 
+  Posible implementación para el futuro, carrusel de imagenes para que el
+  fondo vaya cambiando, no lo implemento actualmente porque me ha gustado más 
+  como queda con un fondo estático pero no descarto mejorarlo y añadirlo en un futuro, 
+  por eso no elimino la clase de momento
+*/
+
+import { useEffect, useState, type FC } from "react";
 
 const IMAGES = [
   './images/ruinas_otoño.png',
