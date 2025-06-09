@@ -37,3 +37,14 @@ body::before{
   pointer-events:none;
   z-index:0;
 }
+
+.hide-scrollbar{
+  scrollbar-width:none;
+  -ms-overflow-style:none;
+}
+
+.hide-scrollbar::-webkit-scrollbar{
+  width:0px;
+  height:0px;
+  background:transparent;
+}

@@ -51,7 +51,14 @@ const MoveLogPanel: FC<Props> = ({ moves, currentTurn }) => (
       Move Log
     </h3>
     <TurnIndicator turn={currentTurn} />
-    <ol style={{ paddingLeft: "1.2rem" }}>
+    <ol 
+      className="hide-scrollbar" 
+      style={{
+        paddingLeft:'1.2rem',
+        overflowY:'auto',
+        flex:1,
+      }}
+      >
       {moves.map((mv) => (
         <li key={mv.no}>
           {COLOR_EMO[mv.color]} ⮞ {PIECE_EMO[mv.piece]}{" "}

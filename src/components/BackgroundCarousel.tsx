@@ -1,6 +1,8 @@
 import { useEffect, useState, type FC } from "react";
 import ruin01 from './images/ruinas_otoño.png'
 import ruin02 from './images/ruinas_primavera.png'
+import king from 'ancient_chess\public\figures\king_white.png'
+import kingg from '/figures/king_white.png'
 
 
 const IMAGES = [
